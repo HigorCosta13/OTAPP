@@ -1,25 +1,26 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import * as React from 'react';
+import { Text, View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello, world!</Text>
-    </View>
-  )
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: 'rgb(59,108,212)',
-    fontSize: 42,
-    fontWeight: '100',
-    textAlign: 'center',
-  },
-})
+import home from './componente/home'
+import agendamento from './componente/agendamento'
+import exames from './componente/exames'
+import perfil from './componente/perfil'
+  
+  const Tab = createBottomTabNavigator();
+  
+
+export default function app() {
+    return (
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={home} />
+            <Tab.Screen name="Exames" component={exames} />
+            <Tab.Screen name="Agendamentos" component={agendamento} />
+            <Tab.Screen name="Perfil" component={perfil} />
+          </Tab.Navigator>
+        </NavigationContainer>
+    );
+  }

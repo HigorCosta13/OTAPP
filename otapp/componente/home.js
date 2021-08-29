@@ -1,14 +1,48 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'; 
+import { Button, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 
-function home({ navigation }) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>home</Text>
+
+
+
+function home() {
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.lateral}>
+        <Text style={styles.textomedio}>Principais atividades</Text>
+        <Button
+          onPress={''}
+          title=" + Adicionar Card"
+          color="#ff5618"
+        />
       </View>
-    );
-  }
-  
+      <View>
+        
+      </View>
+      <View >
+        <Text style={styles.titulo}>Atividades</Text>
+      </View>
+    </SafeAreaView>
 
-  export default home;
+  );
+  }
+var styles = StyleSheet.create({
+  container: {
+    padding: 10
+  },
+  lateral: {
+    fontSize: 20,
+    justifyContent: 'space-between',
+    margin: 10,
+    flexDirection: 'row',
+  },
+  titulo: {
+    fontSize: 30,
+  },
+  textomedio: {
+    fontSize: 20
+  }
+
+});
+
+export default home;

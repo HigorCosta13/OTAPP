@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 
-
+import { Input } from 'react-native-elements/dist/input/Input';
 
 
 function home() {
@@ -17,7 +17,9 @@ function home() {
         />
       </View>
       <View>
-        
+      <Input placeholder='Pesquisar'
+       leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
+       />
       </View>
       <View >
         <Text style={styles.titulo}>Atividades</Text>
@@ -25,7 +27,8 @@ function home() {
     </SafeAreaView>
 
   );
-  }
+}
+
 var styles = StyleSheet.create({
   container: {
     padding: 10

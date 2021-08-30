@@ -37,7 +37,7 @@ function home() {
       <View style={styles.margin} >
       <Divider/>
       </View><View >
-        <Text style={styles.titulo}>vacinação</Text>
+        <Text style={styles.titulo}>Vacinação</Text>
       </View>
       <View style={styles.diviçãoDeItens}>
       <TouchableOpacity>
@@ -68,6 +68,7 @@ var styles = StyleSheet.create({
   titulo: {
     fontSize: 30,
     marginBottom : 10,
+    fontFamily: 'Poppins-SemiBold',
   },
   textomedio: {
    
@@ -75,12 +76,12 @@ var styles = StyleSheet.create({
   textomenu:{
     fontSize: 20,
     textAlign: 'center',
-    fontFamily: 'ZCOOLKuaiLe-Regular',
+    fontFamily: 'Poppins-Medium',
     
   },
   image:{
-    height: 125,
-    width: 179,
+    height: 150,
+    width: 180,
     borderRadius:25
   },
   diviçãoDeItens:{

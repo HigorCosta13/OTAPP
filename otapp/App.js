@@ -1,6 +1,7 @@
 import  React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { StyleSheet } from 'react-native';
 
 
 import home from './componente/home'
@@ -16,7 +17,8 @@ export default function app() {
     return (
         <NavigationContainer>
           <Tab.Navigator
-            barStyle={{ backgroundColor: 'gray' }}
+            barStyle={{ backgroundColor: 'white' }}
+
           >
             <Tab.Screen name="Home" component={home} options={{ tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="home" color={color} size={26} /> ),}} />
             <Tab.Screen name="Exames" component={exames} options={{  tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="calendar" color={color} size={26} /> ),}} />

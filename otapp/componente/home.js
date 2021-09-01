@@ -30,7 +30,7 @@ function home() {
       </View>
       <View>
         <Input placeholder='Pesquisar'
-          leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
+          leftIcon={{ type: 'font-awesome', name: 'search' }}
           style={styles.input}
           color='black'
           backgroundColor='white'
@@ -70,6 +70,9 @@ function home() {
     </SafeAreaView>
 
   );
+
+
+  
 }
 
 var styles = StyleSheet.create({

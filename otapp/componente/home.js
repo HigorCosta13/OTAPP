@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Button, StyleSheet, Text, View, SafeAreaView,TouchableOpacity,Image } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import { fonts } from 'react-native-elements/dist/config';
 import { Input } from 'react-native-elements/dist/input/Input';
-import {Divider} from 'react-native-elements'
+import { Divider, Button } from 'react-native-elements';
 
 
 function home() {
@@ -10,46 +10,63 @@ function home() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.lateral}>
-        <Text style={styles.textomedio}>Principais atividades</Text>
+        <Text style={styles.titulo}>HOME</Text>
         <Button
           title=" + Adicionar Card"
-          color="#ff5618"
+          style={styles.botao}
+          buttonStyle={{
+          borderRadius: 10,
+          backgroundColor: "#ff5618",
+          position: 'relative',
+          zIndex: 10,
+           marginTop: 20,
+           marginBottom: 30
+      
+          }}
         />
+      </View>
+      <View style={styles.atividades}>
+        <Text style={styles.textomedio}>Principais atividades</Text>
       </View>
       <View>
         <Input placeholder='Pesquisar'
           leftIcon={{ type: 'font-awesome', name: 'map-marker' }}
+          style={styles.input}
+          color='black'
+          backgroundColor='white'
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+
         />
       </View>
       <View >
         <Text style={styles.titulo}>Atividades</Text>
       </View>
       <View style={styles.diviçãoDeItens}>
-      <TouchableOpacity>
-        <Image style={styles.image} source={require('../Imagens/exame.jpg')}/>
-        <Text style={styles.textomenu}>Ultimos exames</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Image style={styles.image} source={require('../Imagens/agendamento.jpg')}/>
-        <Text style={styles.textomenu}>Agendar exame</Text>
-      </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.image} source={require('../Imagens/exame.jpg')} />
+          <Text style={styles.textomenu}>Ultimos exames</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.image} source={require('../Imagens/agendamento.jpg')} />
+          <Text style={styles.textomenu}>Agendar exame</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.margin} >
-      <Divider/>
+        <Divider />
       </View><View >
         <Text style={styles.titulo}>Vacinação</Text>
       </View>
       <View style={styles.diviçãoDeItens}>
-      <TouchableOpacity>
-        <Image style={styles.image} source={require('../Imagens/unnamed.jpg')}/>
-        <Text style={styles.textomenu}>Agendamento</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Image style={styles.image} source={require('../Imagens/age.jpeg')}/>
-        <Text style={styles.textomenu}>Proxima Dose</Text>
-      </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.image} source={require('../Imagens/unnamed.jpg')} />
+          <Text style={styles.textomenu}>Agendamento</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.image} source={require('../Imagens/age.jpeg')} />
+          <Text style={styles.textomenu}>Proxima Dose</Text>
+        </TouchableOpacity>
       </View>
-      
+
     </SafeAreaView>
 
   );
@@ -60,40 +77,52 @@ var styles = StyleSheet.create({
     padding: 10
   },
   lateral: {
-    fontSize: 20,
     justifyContent: 'space-between',
     margin: 10,
     flexDirection: 'row',
   },
+  atividades: {
+    justifyContent: 'space-between',
+    marginTop: 80,
+    margin: 10,
+    flexDirection: 'row',
+    position: 'absolute',
+    marginLeft: 30
+  },
   titulo: {
-    fontSize: 30,
-    marginBottom : 10,
+    margin: 10,
+    fontSize: 25,
+    marginBottom: 10,
     fontFamily: 'Poppins-SemiBold',
+
   },
   textomedio: {
-   
+    fontSize: 15,
+    color: 'gray',
   },
-  textomenu:{
+  textomenu: {
     fontSize: 20,
     textAlign: 'center',
     fontFamily: 'Poppins-Medium',
-    
   },
-  image:{
+  image: {
     height: 150,
     width: 180,
-    borderRadius:25
+    borderRadius: 25
   },
-  diviçãoDeItens:{
+  diviçãoDeItens: {
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  margin:{
-    marginBottom : 10,
-    marginTop : 25
-  }
-  
-
+  margin: {
+    marginBottom: 10,
+    marginTop: 25,
+   
+  },
+  input: {
+    borderRadius: 17,
+  },
+ 
 
 });
 

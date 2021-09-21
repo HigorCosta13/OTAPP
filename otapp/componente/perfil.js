@@ -18,14 +18,14 @@ const App = () => {
         <Image source={require('../Imagens/depositphotos_37819499-stock-photo-old-man-smoking.jpg')} style={{
           resizeMode: "stretch",
           width:"100%",
-          height: "100%",
+          height: "103%",
         }}
         />
         </View>
       </View>
       <View style={styles.info}>
         <View style={styles.nameSection}>
-          <Text style={styles.name}>Porsche 911 GT2 RS</Text>
+          <Text style={styles.name}>José da Silva</Text>
         </View>
         <View style={styles.sepBar}>
         </View>
@@ -82,6 +82,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFB",
     borderStartWidth:2,
     borderEndWidth:2,
+    borderTopRightRadius: 24,
+    borderTopLeftRadius: 24,
+    borderColor: "white",
+    borderWidth: 1,
 
   },
 
@@ -209,13 +213,8 @@ MoreInfoText:{
 
 sepBar: {
   marginTop:20,
-  paddingTop: 0.1,
-  borderTopColor: "#E8E8E8",
-  borderBottomColor: "#E8E8E8",
-  borderWidth:2,
   marginRight: 20,
   marginLeft: 20,
-  borderRadius:48,
 },
 
 });

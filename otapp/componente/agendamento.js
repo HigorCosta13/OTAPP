@@ -4,6 +4,11 @@ import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Picker } from '@react-native-picker/picker';
 import { Button } from 'react-native-elements';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import map from './map'
+
 
 LocaleConfig.locales['br'] = {
   monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
@@ -15,9 +20,7 @@ LocaleConfig.locales['br'] = {
 
 LocaleConfig.defaultLocale = "br"
 
-function agendamento({ navigation }) {
-
-
+function agendamentos({ navigation }) {
 
   const [especialidades] = useState(['Acupuntura', 'Alergia e imunologia', 'Anestesiologia', 'Angiologia', 'Cardiologia', 'Cirurgia cardiovascular', 'Cirurgia da mão', 'Cirurgia de cabeça e pescoço', 'Cirurgia do aparelho digestivo', 'Cirurgia geral', 'Cirurgia oncológica', 'Cirurgia pediátrica', 'Cirurgia plástica', 'Cirurgia torácica', 'Cirurgia vascular', 'Clínica médica', 'Coloproctologia', 'Dermatologia', 'Endocrinologia e metabologia', 'Endoscopia', 'Gastroenterologia', 'Genética médica', 'Geriatria', 'Ginecologia e obstetrícia', 'Hematologia e hemoterapia', 'Homeopatia', 'Infectologia', 'Mastologia', 'Medicina de emergência', 'Medicina de família e comunidade', 'Medicina do trabalho', 'Medicina de tráfego', 'Medicina esportiva', 'Medicina física e reabilitação', 'Medicina intensiva', 'Medicina legal e perícia médica', 'Medicina nuclear', 'Medicina preventiva e social', 'Nefrologia', 'Neurocirurgia', 'Neurologia', 'Nutrologia', 'Oftalmologia', 'Oncologia clínica', 'Ortopedia e traumatologia', 'Otorrinolaringologia', 'Patologia', 'Patologia clínica/medicina/laboratorial', 'Pediatria', 'Pneumologia', 'Psiquiatria', 'Radiologia e diagnóstico por imagem', 'Radioterapia', 'Reumatologia', 'Urologia'])
 
@@ -30,6 +33,7 @@ function agendamento({ navigation }) {
   const [horarios] = useState(['08:00', '09:00', '11:30', '15:00', '16:30', '17:00'])
 
   const [horarioSelecionado, setHorarioSelecionado] = useState([])
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,9 +80,20 @@ function agendamento({ navigation }) {
                 return <Picker.Item label={hos} value={hos} key={hos} />
               })}
           </Picker>
+
+          <Button
+            title="Ver Mapa"
+            buttonStyle={{
+              borderRadius: 10,
+              backgroundColor: "#ff5618",
+              margin: 10
+            }}
+            onPress={() => {
+              navigation.navigate('map');
+            }}
+          />
+
         </View>
-
-
         <View>
           <Text style={styles.select}>Horários Díponiveis:</Text>
           <Picker selectedValue={horarioSelecionado} style={{ height: 50, width: 200, marginLeft: 100, marginTop: -40, alignSelf: 'flex-end' }}
@@ -101,17 +116,17 @@ function agendamento({ navigation }) {
             buttonStyle={{
               borderRadius: 10,
               backgroundColor: "#ff5618",
-              margin : 10,
+              margin: 10,
               justifyContent: 'center',
               width: 100
             }}
           />
-            <Button
+          <Button
             title="Agenda"
             buttonStyle={{
               borderRadius: 10,
               backgroundColor: "#ff5618",
-              margin : 10,
+              margin: 10,
               justifyContent: 'center',
               width: 100
             }}
@@ -176,7 +191,7 @@ var styles = StyleSheet.create({
   },
   botaoarea: {
     flexDirection: 'row',
-    margin : 10,
+    margin: 10,
     justifyContent: 'center',
   },
   btntext: {
@@ -185,5 +200,24 @@ var styles = StyleSheet.create({
     fontSize: 20,
   }
 });
+const Stack = createStackNavigator();
 
-export default agendamento;
+function MyStack() {
+  return (
+    
+      <Stack.Navigator initialRouteName='agendamentos'>
+        <Stack.Screen name='agendamentos' component={agendamentos} />
+        <Stack.Screen name='map' component={map} />
+      </Stack.Navigator>
+ 
+  );
+}
+
+
+export default function agendamento() {
+  return (
+    <NavigationContainer independent={true}>
+      <MyStack />
+    </NavigationContainer>
+  );
+}

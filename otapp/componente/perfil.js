@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Alert,
   Button,
@@ -9,7 +9,12 @@ import {
   Pressable,
 } from 'react-native';
 
-const App = () => {
+const AuthContext = React.createContext();
+
+const perfil = () => {
+
+  const  signOut  = React.useContext(AuthContext);
+
 
   return (
     <View style={styles.container}> 
@@ -57,9 +62,11 @@ const App = () => {
             <Text style= {styles.minDetailsText}>{'\u25CF'} Pendência de vacinação - Covid-19</Text>
         </View>
         <View>
+        <Button title="Sign out" onPr ess={signOut} />
           <Pressable  onPress={()=> Alert.alert("Za Waruuudo!")} style={styles.moreInfoButton}>
             <Text style={styles.MoreInfoText}>Mais Informações</Text>
           </Pressable>
+          
         </View>
       </View>
     </View>
@@ -219,4 +226,4 @@ sepBar: {
 
 });
 
-export default App;
+export default perfil;

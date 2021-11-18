@@ -3,15 +3,17 @@ import { SafeAreaView, View } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
 import { loginStyle } from '../styles/login.style';
 
-function login() {
 
+function login({ navigation }) {
     return (
+
         <SafeAreaView style={loginStyle.content}>
+           
             <View style={loginStyle.view}>
                 <Card>
                     <Card.Content>
                         <View style={loginStyle.view2}>
-                            <Text style={loginStyle.text1}>Vamos Começar</Text>
+                            <Text style={loginStyle.text1}>OTAPP</Text>
                         </View>
                         <View style={loginStyle.view3}>
                             <Text style={loginStyle.text2}>Entre com seu e-mail e senha</Text>
@@ -22,25 +24,22 @@ function login() {
                         <Button mode="contained" style={loginStyle.button} onPress={() => console.log('Pressed')}>
                             <Text style={loginStyle.textButton}>Entrar</Text>
                         </Button>
-                        <Button icon="google" mode="outlined" onPress={() => console.log('Pressed')} style={loginStyle.google}>
-                            <Text>Iniciar sessão com o Google</Text>
-                        </Button>
                         <Button uppercase={false} onPress={() => console.log('Pressed')} style={loginStyle.senha}>
                             <Text>Esqueceu a senha?</Text>
                         </Button>
                         <View>
                             <Text style={loginStyle.text3}>OU</Text>
                         </View>
-                        <Button mode="contained" style={loginStyle.button} onPress={() => console.log('Pressed')}>
+                        <Button mode="contained" style={loginStyle.button} onPress={()=> navigation.navigate('cadastro',{name:'cadastro'})} >
                             <Text style={loginStyle.textButton}>Cadastrar</Text>
                         </Button>
-                    </Card.Content> 
+                    </Card.Content>
                 </Card>
             </View>
 
         </SafeAreaView>
 
-  );
+    );
 
 };
 

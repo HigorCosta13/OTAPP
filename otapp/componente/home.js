@@ -75,58 +75,55 @@ function home() {
   
 }
 
-var styles = StyleSheet.create({
-  container: {
-    padding: 10
-  },
-  lateral: {
-    justifyContent: 'space-between',
-    margin: 10,
-    flexDirection: 'row',
-  },
-  atividades: {
-    justifyContent: 'space-between',
-    marginTop: 80,
-    margin: 10,
-    flexDirection: 'row',
-    position: 'absolute',
-    marginLeft: 30
-  },
-  titulo: {
-    margin: 10,
-    fontSize: 25,
-    marginBottom: 10,
-    fontFamily: 'Poppins-SemiBold',
+var styles = StyleSheet.create({container: {
+  padding: 10
+},
+lateral: {
+  justifyContent: 'space-between',
+  margin: 10,
+  flexDirection: 'row',
+},
+atividades: {
+  justifyContent: 'space-between',
+  marginTop: 80,
+  margin: 10,
+  flexDirection: 'row',
+  position: 'absolute',
+  marginLeft: 30
+},
+titulo: {
+  margin: 10,
+  fontSize: 25,
+  marginBottom: 10,
+  fontFamily: 'Poppins-SemiBold',
 
-  },
-  textomedio: {
-    fontSize: 15,
-    color: 'gray',
-  },
-  textomenu: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontFamily: 'Poppins-Medium',
-  },
-  image: {
-    height: 150,
-    width: 180,
-    borderRadius: 25
-  },
-  diviçãoDeItens: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  margin: {
-    marginBottom: 10,
-    marginTop: 25,
-   
-  },
-  input: {
-    borderRadius: 17,
-  },
+},
+textomedio: {
+  fontSize: 15,
+  color: 'gray',
+},
+textomenu: {
+  fontSize: 20,
+  textAlign: 'center',
+  fontFamily: 'Poppins-Medium',
+},
+image: {
+  height: 150,
+  width: 180,
+  borderRadius: 25
+},
+diviçãoDeItens: {
+  justifyContent: 'space-between',
+  flexDirection: 'row',
+},
+margin: {
+  marginBottom: 10,
+  marginTop: 25,
  
-
+},
+input: {
+  borderRadius: 17,
+},
 });
 
 export default home;

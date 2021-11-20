@@ -1,14 +1,31 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View ,StyleSheet} from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
-import { loginStyle } from '../styles/login.style';
-import { Alert} from 'react-native'
+import { Alert } from 'react-native'
 
 function login({ navigation }) {
+
+
+
+    function Postlogin(){
+        fetch('http://192.168.1.110:44342/Usuario/login    ', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                senha: senha
+            })
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('success', response));
+    }
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
     return (
-        
+
         <SafeAreaView style={loginStyle.content}>
 
             <View style={loginStyle.view}>
@@ -21,17 +38,9 @@ function login({ navigation }) {
                             <Text style={loginStyle.text2}>Entre com seu e-mail e senha</Text>
                         </View>
 
-                        <TextInput label="E-mail" keyboardType="email-address"  value={email}  onChangeText={text => setEmail(text)} style={loginStyle.textInput1}></TextInput>
-                        <TextInput label="Senha de acesso" secureTextEntry={true}  value={senha}  onChangeText={text => setSenha(text)}  style={loginStyle.textInput2}></TextInput>
-                        <Button mode="contained" style={loginStyle.button} onPress={() => Alert.alert(
-                                                                                        'Alert Title',
-                                                                                         'Email '+ email +' , ' + 'senha ' + senha , 
-                                                                                        [
-                                                                                            { text: 'Cancel', onPress: () => console.log('Cancel Pressed!') },
-                                                                                         
-                                                                                        ],
-                                                                                        { cancelable: false }
-                                                                                    )}>
+                        <TextInput label="E-mail" keyboardType="email-address" value={email} onChangeText={text => setEmail(text)} style={loginStyle.textInput1}></TextInput>
+                        <TextInput label="Senha de acesso" secureTextEntry={true} value={senha} onChangeText={text => setSenha(text)} style={loginStyle.textInput2}></TextInput>
+                        <Button mode="contained" style={loginStyle.button} onPress={() => Postlogin()}>
                             <Text style={loginStyle.textButton}>Entrar</Text>
                         </Button>
                         <View>
@@ -49,5 +58,65 @@ function login({ navigation }) {
     );
 
 };
+
+const loginStyle = StyleSheet.create({
+    content: {
+        display: "flex",
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        backgroundColor: 'white',
+    },
+    view: {
+        width: "100%",
+        height: "100%"
+    },
+    view2: {
+        marginBottom: 10
+    },
+    view3: {
+        marginBottom: 80
+    },
+    text1: {
+        fontSize: 37,
+        fontFamily: 'Poppins-Bold',
+        fontWeight: 'bold',
+        marginTop: 20
+    },
+    text2: {
+        fontSize: 18
+    },
+    textInput1: {
+        marginBottom: 10
+    },
+    textInput2: {
+        marginBottom: 20
+    },
+    button: {
+        backgroundColor: "#ff5618",
+        marginBottom: 10,
+        height: 60,
+        justifyContent: 'center'
+    },
+    text3: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    textButton: {
+        color: 'white',
+        fontFamily: 'Poppins-Bold',
+        fontSize: 20,
+        textAlignVertical: 'center'
+    },
+    senha: {
+        marginTop: 15,
+        marginBottom: 20,
+    },
+    google: {
+        marginTop: 20
+    }
+})
 
 export default login;

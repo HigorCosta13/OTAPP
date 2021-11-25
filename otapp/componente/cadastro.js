@@ -1,74 +1,115 @@
-import { Camera } from 'expo-camera';
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, ScrollView, TouchableOpacity, styles, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, ScrollView, StyleSheet, Platform } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
-import { Asset, Constants, FileSystem } from 'react-native-unimodules';
+import DatePicker from 'react-native-datepicker';
+import MaskInput from 'react-native-mask-input';
+import RNFS from 'react-native-fs';
+import RNFetchBlob from 'react-native-fetch-blob';
 
-function cadastro() {
+function cadastro({ navigation }) {
+    function PostCadastro() {
+        fetch('http://192.168.1.110:44342/Usuario/Cadastro', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nome,
+                sobrenome: sobrenome,
+                cpf: cpf,
+                dataDeNascimento: date,
+                email: email,
+                senha: senha,
+                imagem:foto
+            })
+        }).then(res => res.json(), console.log(foto))
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('success', response));
+    }
+
+
     const [nome, setNome] = React.useState('');
     const [sobrenome, setSobrenome] = React.useState('');
     const [cpf, setCpf] = React.useState('');
-    const [dataDeNascimento, setDataDeNascimento] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
     const [confimarSenha, setConfimarSenha] = React.useState('');
-    const [foto, setFoto] = React.useState('');
-    const [type, setType] = useState(Camera.Constants.Type.front)
+
     const [hasPermission, setHasPermission] = useState(null);
+    const [date, setDate] = useState();
+    const foto =  RNFetchBlob.foto
+    path = 'file:///storage/emulated/0/Android/data/com.otapp/cache/myTest.jpg'
+    foto.readFile(path,'base64').then();
 
-    useEffect(() => {
-        (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setHasPermission(status === 'granted')
-        })();
-    }, [])
 
-    if (hasPermission === null) {
-        return <View />
-    }
-
-    if (hasPermission === false) {
-        return <Text> Acesso Negado!</Text>
-    }
 
     return (
-        <SafeAreaView style={cadastroStyle.content}>
-            <View style={cadastroStyle.view}>
+        <SafeAreaView style={styles.content}>
+            <View style={styles.view}>
                 <Card>
                     <Card.Content>
-                        <View style={cadastroStyle.view2}>
-                            <Text style={cadastroStyle.text1}>Cadastro</Text>
+                        <View style={styles.view2}>
+                            <Text style={styles.text1}>Cadastro</Text>
                         </View>
                         <ScrollView contentContainerStyle={{ paddingHorizontal: 2 }}>
-                            <TextInput label="Nome" keyboardType="name-phone-pad" style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="Sobrenome" keyboardType="name-phone-pad" style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="cpf" keyboardType="name-phone-pad" style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="Data de Nascimento" keyboardType="name-phone-pad" style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="E-mail" keyboardType="email-address" style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="Senha" secureTextEntry={true} style={cadastroStyle.textInput1}></TextInput>
-                            <TextInput label="Confirmar senha" secureTextEntry={true} style={cadastroStyle.textInput1}></TextInput>
+                            <TextInput label="Nome" keyboardType="name-phone-pad" value={nome} onChangeText={text => setNome(text)} style={styles.textInput1} />
+                            <TextInput label="Sobrenome" keyboardType="name-phone-pad" value={sobrenome} onChangeText={text => setSobrenome(text)} style={styles.textInput1} />
+                            <TextInput label="data" keyboardType="name-phone-pad" value={date} onChangeText={text => setDate(text)} style={styles.textInput1} />
+                            <TextInput label="cpf" keyboardType="name-phone-pad" value={cpf} onChangeText={text => setCpf(text)} style={styles.textInput1} />
+                            {/* <MaskInput
+                                style={styles.textInput1}
+                                value={cpf}
+                                onChangeText={(masked) => {
+                                    setCpf(masked);
+                                }}
+                                mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+                            />
+                            <MaskInput
+                                style={styles.textInput1}
+                                value={date}
+                                onChangeText={(masked) => {
+                                    setDate(masked);
+                                }}
+                                mask={[/\d/, /\d/, /\d/, /\d/,'-', /\d/, /\d/,'-', /\d/, /\d/]}
+                            /> */}
+                            {/* <DatePicker
+                                value={date}
+                                style={styles.datePickerStyle}
+                                date={date} // Initial date from state
+                                mode="date" // The enum of date, datetime and time
+                                placeholder="select date"
+                                format="YYYY-MM-DD"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                    dateIcon: {
+                                        //display: 'none',
+                                        position: 'absolute',
+                                        left: 0,
+                                        top: 4,
+                                        marginLeft: 0,
+                                    },
+                                    dateInput: {
+                                        marginLeft: 36,
+                                    },
+                                }}
+                                onDateChange={(date) => {
+                                    setDate(date);
+                                }}
+                            /> */}
+                            <TextInput label="E-mail" keyboardType="email-address" style={styles.textInput1} value={email} onChangeText={text => setEmail(text)} />
+                            <TextInput label="Senha" secureTextEntry={true} value={senha} onChangeText={text => setSenha(text)} style={styles.textInput1} />
+                            <TextInput label="Confirmar senha" secureTextEntry={true} value={confimarSenha} onChangeText={text => setConfimarSenha(text)} style={styles.textInput1} />
+                            <Button mode="contained" style={styles.button} onPress={() => navigation.navigate('camera')}>
+                                <Text style={styles.textButton}>Camera</Text>
+                            </Button>
                             <View>
-                                <Camera style={cadastroStyle.camera} type={type}>
-                                    <View style={cadastroStyle.buttonContainer}>
-                                        <TouchableOpacity
-                                            style={cadastroStyle.button}
-                                            onPress={() => {
-                                                setType(
-                                                    type === Camera.Constants.Type.back
-                                                        ? Camera.Constants.Type.front
-                                                        : Camera.Constants.Type.back
-                                                );
-                                            }}>
-                                            <Text style={styles.text}> Flip </Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Camera>
+                                <Button mode="contained" style={styles.button} onPress={() => PostCadastro()}>
+                                    <Text style={styles.textButton}>Cadastrar</Text>
+                                </Button>
                             </View>
                         </ScrollView>
-                        <Button mode="contained" style={cadastroStyle.button} onPress={() => console.log('Pressed')}>
-                            <Text style={cadastroStyle.textButton}>Cadastrar</Text>
-                        </Button>
-
                     </Card.Content>
                 </Card>
             </View>
@@ -79,7 +120,7 @@ function cadastro() {
 
 };
 
-const cadastroStyle = StyleSheet.create({
+const styles = StyleSheet.create({
     content: {
         display: "flex",
         flex: 1,
@@ -151,6 +192,17 @@ const cadastroStyle = StyleSheet.create({
     text: {
         fontSize: 18,
         color: 'white',
+    },
+
+    title: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        padding: 20,
+    },
+    datePickerStyle: {
+        width: 200,
+        marginTop: 20,
     },
 })
 

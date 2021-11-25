@@ -1,14 +1,13 @@
 import React from 'react';
 import { SafeAreaView, View ,StyleSheet} from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
-import { Alert } from 'react-native'
 
 function login({ navigation }) {
 
 
 
-    function Postlogin(){
-        fetch('http://192.168.1.110:44342/Usuario/login    ', {
+    function PostLogin(){
+        fetch('http://192.168.1.110:44342/Usuario/login', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -40,7 +39,7 @@ function login({ navigation }) {
 
                         <TextInput label="E-mail" keyboardType="email-address" value={email} onChangeText={text => setEmail(text)} style={loginStyle.textInput1}></TextInput>
                         <TextInput label="Senha de acesso" secureTextEntry={true} value={senha} onChangeText={text => setSenha(text)} style={loginStyle.textInput2}></TextInput>
-                        <Button mode="contained" style={loginStyle.button} onPress={() => Postlogin()}>
+                        <Button mode="contained" style={loginStyle.button} onPress={() => PostLogin()}>
                             <Text style={loginStyle.textButton}>Entrar</Text>
                         </Button>
                         <View>

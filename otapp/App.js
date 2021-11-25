@@ -1,12 +1,14 @@
 import * as React  from 'react';
 import {  View,  } from 'react-native';
-import { Text,  } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import login  from './componente/login';
 import principal from './componente/principal';
 import cadastro from './componente/cadastro';
+import camera from './componente/camera';
+import preview from './componente/preview';
 
 const AuthContext = React.createContext();
 const Stack = createStackNavigator();
@@ -100,6 +102,8 @@ export default function App({ navigation   }) {
             <Stack.Screen name="OTAPP" component={principal} />
           )}
           <Stack.Screen name='cadastro' component={cadastro} />
+          <Stack.Screen name='camera' component={camera} />
+          <Stack.Screen name='preview' component={preview} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

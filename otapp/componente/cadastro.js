@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, ScrollView, StyleSheet, Platform } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
-import DatePicker from 'react-native-datepicker';
-import MaskInput from 'react-native-mask-input';
 import RNFS from 'react-native-fs';
-import RNFetchBlob from 'react-native-fetch-blob';
+
 
 function cadastro({ navigation }) {
     function PostCadastro() {
@@ -21,11 +19,12 @@ function cadastro({ navigation }) {
                 dataDeNascimento: date,
                 email: email,
                 senha: senha,
-                imagem:foto
+                imagem: imagem
             })
-        }).then(res => res.json(), console.log(foto))
+        }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('success', response));
+            .then();
+            navigation.navigate('SignIn', { screen: 'SignIn' });    
     }
 
 
@@ -38,11 +37,17 @@ function cadastro({ navigation }) {
 
     const [hasPermission, setHasPermission] = useState(null);
     const [date, setDate] = useState();
-    const foto =  RNFetchBlob.foto
-    path = 'file:///storage/emulated/0/Android/data/com.otapp/cache/myTest.jpg'
-    foto.readFile(path,'base64').then();
+    const path = 'file:///storage/emulated/0/Android/data/com.otapp/cache/myTest.jpg'
+    const [imagem, setImagem] = useState('');
 
+const base64 = (imagem) =>{
+    RNFS.readFile(imagem, 'base64')
+    .then(res =>{
+      setImagem(res)
+    })
 
+}
+base64(path)
 
     return (
         <SafeAreaView style={styles.content}>

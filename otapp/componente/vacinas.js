@@ -9,31 +9,31 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Button } from 'react-native-paper';
-import { navigation } from '@react-navigation/native';
+import { navigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import results from './results';
+import results2 from './results2';
+import ListItemVac from './ListItemVac';
 import { Text } from 'react-native-elements';
-import ListItem from './ListItem';
 
 
-function exame({ navigation, route }) {
+function vacina({ navigation, route }) {
   
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(results);
+  const [list, setList] = useState(results2);
   
   useEffect(() => {
     if (searchText === '') {
-      setList(results);
+      setList(results2);
     } else { 
       setList(
-        results.filter((item) => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
+        results2.filter((item) => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
       );
     }
   }, [searchText]);
 
   const handleOrderClick = () => {
-    let newList = [...results];
+    let newList = [...results2];
 
     newList.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
 
@@ -43,11 +43,18 @@ function exame({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Text style={styles.titulo}>Meus Exames</Text>
-      <Button style={styles.voltar} 
-        icon="chevron-left" mode="text" onPress={() => navigation.navigate("Home")}>
-        <Text style={styles.voltarTexto}>Voltar</Text>
-      </Button>
+      <Text style={styles.titulo}>Minhas Vacinas</Text>
+      <View>
+        <Button style={styles.voltar} 
+          icon="chevron-left" mode="text" onPress={() => navigation.navigate("Home")}>
+          <Text style={styles.voltarTexto}>Voltar</Text>
+        </Button>
+        <Button style={styles.maissobre} 
+          icon="chevron-right" mode="text" onPress={() => navigation.navigate("Info")}>
+          <Text style={styles.voltarTexto}>Info Vacinas</Text>
+        </Button>
+      </View>
+      
       <View style={styles.searchArea}>
         <TextInput
           style={styles.input}
@@ -70,7 +77,7 @@ function exame({ navigation, route }) {
         data={list}
         style={styles.list}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ListItem data={item}/>}
+        renderItem={({ item }) => <ListItemVac data={item}/>}
       />
     </SafeAreaView>
   );
@@ -119,6 +126,11 @@ const styles = StyleSheet.create({
   voltarTexto: {
     textDecorationLine: 'underline',
   },
+  maissobre: {
+    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
+    position: 'absolute'
+  },
 });
 
-export default exame;
+export default vacina;

@@ -1,28 +1,30 @@
 import { StyleSheet } from 'react-native';
 
-export const loginStyle = StyleSheet.create({
+export const exameStyle = StyleSheet.create({
     content: {
+        display: "flex",
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
         backgroundColor: 'white',
     },
     view: {
         width: "100%",
-        height: "100%"
+        height: "100%",
     },
     view2: {
         marginBottom: 10
     },
     view3: {
-        marginBottom: 40
+        marginBottom: 80
     },
     text1: {
         fontSize: 37,
         fontFamily: 'Poppins-Bold',
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 40
     },
     text2: {
         fontSize: 18
@@ -34,9 +36,10 @@ export const loginStyle = StyleSheet.create({
         marginBottom: 20
     },
     button: {
-        backgroundColor: "#ff5618",
+        backgroundColor: "#F8F8FF",
         marginBottom: 10,
-        height: 60,
+        height: 80,
+        alignItems: 'flex-start',
         justifyContent: 'center'
     },
     text3: {
@@ -45,23 +48,37 @@ export const loginStyle = StyleSheet.create({
         marginBottom: 10,
     },
     textButton: {
-        color: 'white',
+        color: 'black',
         fontFamily: 'Poppins-Bold',
         fontSize: 20,
-        textAlignVertical: 'center'
+        textAlign: 'left',
     },
     senha: {
         marginTop: 15,
-        marginBottom: 20
+        marginBottom: 20,
     },
     google: {
         marginTop: 20
     },
-    logo:{
-        flex: 0,
-        marginLeft: "90%",
-        marginTop: "15%",
-        position: 'absolute',
-        alignItems: 'center'
+    image: {
+        height: 150,
+        width: 180,
+        borderRadius: 25
+    },
+    diviçãoDeItens: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
+    margin1: {
+        marginBottom: 25,
+        marginTop: 25,
+    },
+    margin2: {
+        marginBottom: 10,
+        marginTop: 25,
+    },
+    list: {
+        backgroundColor: "blue",
+        opacity: 50
     }
 })

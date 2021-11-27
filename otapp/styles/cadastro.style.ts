@@ -17,7 +17,7 @@ export const cadastroStyle = StyleSheet.create({
         marginBottom: 10
     },
     view3: {
-        marginBottom: 80
+        marginBottom: 40
     },
     text1: {
         fontSize: 37,
@@ -54,5 +54,13 @@ export const cadastroStyle = StyleSheet.create({
     google: {
         marginTop: 20,
         marginBottom: 20
+    },
+    logo:{
+        flex: 0,
+        marginLeft: "90%",
+        marginTop: "15%",
+        position: 'absolute',
+        alignItems: 'center'
+        
     }
 })

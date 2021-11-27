@@ -3,14 +3,19 @@ import {  View,  } from 'react-native';
 import { Text } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import login  from './componente/login';
 import principal from './componente/principal';
 import cadastro from './componente/cadastro';
 import camera from './componente/camera';
 import preview from './componente/preview';
+import ListItem from './componente/ListItem'
+
 
 const AuthContext = React.createContext();
+
+const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 
@@ -101,9 +106,11 @@ export default function App({ navigation   }) {
             // User is signed in
             <Stack.Screen name="OTAPP" component={principal} />
           )}
+          <Stack.Screen name="OTAPP" component={principal} />
           <Stack.Screen name='cadastro' component={cadastro} />
           <Stack.Screen name='camera' component={camera} />
           <Stack.Screen name='preview' component={preview} />
+          <Stack.Screen name='ListItem' component={ListItem} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

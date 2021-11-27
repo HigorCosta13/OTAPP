@@ -1,29 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Alert,
-  Button,
   StyleSheet,
   Text,
   View,
   Image,
-  Pressable,
+  TouchableOpacity
 } from 'react-native';
+import { Button } from 'react-native-elements';
+import { navigation } from '@react-navigation/native';
 
-const AuthContext = React.createContext();
-
-const perfil = () => {
-
-  const  signOut  = React.useContext(AuthContext);
-
+const App = ({navigation, route}) => {
 
   return (
     <View style={styles.container}> 
       <View style={styles.photo}>
         <View>
-        <Image source={require('../Imagens/depositphotos_37819499-stock-photo-old-man-smoking.jpg')} style={{
-          resizeMode: "stretch",
-          width:"100%",
-          height: "103%",
+        <Image source={require('../Imagens/senhor.jpeg')} style={{
+          width: 250,
+          height: 250,
+          borderRadius: 150,
+          marginTop: -30
         }}
         />
         </View>
@@ -34,39 +31,41 @@ const perfil = () => {
         </View>
         <View style={styles.sepBar}>
         </View>
-        <View style={styles.categories}>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.categoryText}>Sobre</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.categoryText}>Exames</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.categoryText}>Agendar</Text>
-          </Pressable>
-        </View>
         <View style={styles.ageCate}>
           <View>
             <Text style={styles.cateItemText}>Idade</Text>
-            <Text style={styles.cateItemValue}>55 Anos</Text>
+            <Text style={styles.cateItemValue}>80 Anos</Text>
           </View>
           <View>
             <Text style={styles.cateItemText}>Nascimento</Text>
-            <Text style={styles.cateItemValue}>10/05/1966 </Text>
+            <Text style={styles.cateItemValue}>15/05/1941</Text>
+          </View>
+          <View>
+            <Text style={styles.cateItemText}>Tipo Sanguineo:</Text>
+            <Text style={styles.cateItemValue}>A+</Text>
           </View>
         </View>
-        <View style= {styles.minDetails}> 
-            <Text style= {styles.minDetailsText}>{'\u25CF'} Cardiomiopatia Hipertrófica</Text>
-            <Text style= {styles.minDetailsText}>{'\u25CF'} Alérgio a AAS (Ácido acetilsalicílico)</Text>
-            <Text style= {styles.minDetailsText}>{'\u25CF'} Último exame realizado em 2019</Text>
-            <Text style= {styles.minDetailsText}>{'\u25CF'} Pendência de vacinação - Covid-19</Text>
+        <View style= {styles.minDetails}>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Contato: {"("}19{")"}99467-8542</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Cardiomiopatia Hipertrófica</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Alérgio a AAS (Ácido acetilsalicílico)</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Último exame realizado em 2019</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Altura: 1,98</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Peso: 80</Text>
+          <Text style= {styles.minDetailsText}>{'\u25CF'} Pendência de vacinação - Covid-19</Text>
         </View>
-        <View>
-        <Button title="Sign out" onPr ess={signOut} />
-          <Pressable  onPress={()=> Alert.alert("Za Waruuudo!")} style={styles.moreInfoButton}>
-            <Text style={styles.MoreInfoText}>Mais Informações</Text>
-          </Pressable>
-          
+        <View style={styles.categories}>
+          <Button title='Fazer Logout' onPress={() => navigation.navigate("Login")}
+            buttonStyle={{
+              borderRadius: 10,
+              backgroundColor: "#ff5618",
+              marginTop: 10,
+              marginRight: 20,
+              justifyContent: 'center',
+              width: 150
+            }}
+            //disabled
+          />
         </View>
       </View>
     </View>
@@ -75,45 +74,49 @@ const perfil = () => {
 
 const styles = StyleSheet.create({
   container:  {
+    flex: 1,
     flexDirection: "column",
-    backgroundColor: "#FFFF",
+    backgroundColor: 'white'
   },
   photo:{
     flex: 0,
     height: "40%",
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: -40,
+    backgroundColor: 'white'
   },
   
   info: {
     flex:0,
-    height:"60%",
-    backgroundColor: "#FBFBFB",
+    height:"90%",
     borderStartWidth:2,
     borderEndWidth:2,
-    borderTopRightRadius: 24,
-    borderTopLeftRadius: 24,
+    backgroundColor: 'white',
     borderColor: "white",
     borderWidth: 1,
 
   },
 
   nameSection: {
-    marginTop:5,
     paddingTop:15,
     justifyContent:'center',
     flexDirection:'row',
+    backgroundColor: 'transparent',
+    
   },
   name:{
     flexDirection: "row",
     justifyContent: "center",
-    fontWeight: "bold",
-    fontFamily: "Poppins",
-    fontSize:28,
-    color:"#2B2B2B",
+    fontFamily: 'Poppins-Bold',
+    fontWeight: 'bold',
+    fontSize: 35,
+    color: 'black',
   },
   categories:{
     flexDirection:"row",
     marginTop:10,
-    marginBottom:20,
+    marginBottom: 10,
     justifyContent: "center",
   },
   categoryButton:{
@@ -151,6 +154,12 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     color: "#B0B0B0",
     fontFamily: "poppins",
+    backgroundColor: 'red',
+    width: 100,
+    height: 30,
+    borderRadius: 10,
+    textAlign: 'center',
+    justifyContent: 'center'
   },
 
   categoryTextActive: {
@@ -161,10 +170,13 @@ const styles = StyleSheet.create({
   },
 
   ageCate: {
+    marginLeft: -30,
     flexDirection: "row",
     marginTop: 10,
     marginBottom:10,
     alignContent: "center",
+    backgroundColor: 'white',
+    justifyContent: 'center'
   },
 
   cateItemText:{
@@ -181,9 +193,8 @@ const styles = StyleSheet.create({
 },
 
 minDetails:{
-
   paddingTop:10,
-  paddingLeft:15,
+  paddingLeft:40,
   paddingRight:15,
   paddingBottom:10,
 },
@@ -207,7 +218,7 @@ moreInfoButton: {
   paddingBottom:10,
   paddingRight:12,
   paddingLeft:12,
-  backgroundColor: "#FF9345",
+  backgroundColor: "#ff5618",
 },
 
 MoreInfoText:{
@@ -223,7 +234,18 @@ sepBar: {
   marginRight: 20,
   marginLeft: 20,
 },
+margin1: {
+  marginBottom: 25,
+  marginTop: 20,
 
-});
+},
+redes_sociais:{
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '55%',
+  marginTop: 20,
+},
+})
+;
 
-export default perfil;
+export default App;

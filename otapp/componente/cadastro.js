@@ -21,10 +21,9 @@ function cadastro({ navigation }) {
                 senha: senha,
                 imagem: imagem
             })
-        }).then(res => res.json())
+        }).then(res => res.json(),navigation.navigate('SignIn', { screen: 'SignIn' })   )
             .catch(error => console.error('Error:', error))
-            .then();
-            navigation.navigate('SignIn', { screen: 'SignIn' });    
+            
     }
 
 
@@ -62,47 +61,6 @@ base64(path)
                             <TextInput label="Sobrenome" keyboardType="name-phone-pad" value={sobrenome} onChangeText={text => setSobrenome(text)} style={styles.textInput1} />
                             <TextInput label="data" keyboardType="name-phone-pad" value={date} onChangeText={text => setDate(text)} style={styles.textInput1} />
                             <TextInput label="cpf" keyboardType="name-phone-pad" value={cpf} onChangeText={text => setCpf(text)} style={styles.textInput1} />
-                            {/* <MaskInput
-                                style={styles.textInput1}
-                                value={cpf}
-                                onChangeText={(masked) => {
-                                    setCpf(masked);
-                                }}
-                                mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
-                            />
-                            <MaskInput
-                                style={styles.textInput1}
-                                value={date}
-                                onChangeText={(masked) => {
-                                    setDate(masked);
-                                }}
-                                mask={[/\d/, /\d/, /\d/, /\d/,'-', /\d/, /\d/,'-', /\d/, /\d/]}
-                            /> */}
-                            {/* <DatePicker
-                                value={date}
-                                style={styles.datePickerStyle}
-                                date={date} // Initial date from state
-                                mode="date" // The enum of date, datetime and time
-                                placeholder="select date"
-                                format="YYYY-MM-DD"
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
-                                customStyles={{
-                                    dateIcon: {
-                                        //display: 'none',
-                                        position: 'absolute',
-                                        left: 0,
-                                        top: 4,
-                                        marginLeft: 0,
-                                    },
-                                    dateInput: {
-                                        marginLeft: 36,
-                                    },
-                                }}
-                                onDateChange={(date) => {
-                                    setDate(date);
-                                }}
-                            /> */}
                             <TextInput label="E-mail" keyboardType="email-address" style={styles.textInput1} value={email} onChangeText={text => setEmail(text)} />
                             <TextInput label="Senha" secureTextEntry={true} value={senha} onChangeText={text => setSenha(text)} style={styles.textInput1} />
                             <TextInput label="Confirmar senha" secureTextEntry={true} value={confimarSenha} onChangeText={text => setConfimarSenha(text)} style={styles.textInput1} />

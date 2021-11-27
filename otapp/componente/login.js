@@ -1,12 +1,11 @@
 import React from 'react';
-import { SafeAreaView, View ,StyleSheet} from 'react-native';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function login({ navigation }) {
 
-
-
-    function PostLogin(){
+    function PostLogin() {
         fetch('http://192.168.1.110:44342/Usuario/login', {
             method: 'POST',
             headers: {
@@ -19,10 +18,24 @@ function login({ navigation }) {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('success', response));
+            .then(response => setToken(response));
+            navigation.navigate('OTAPP', { screen: 'OTAPP' }) 
     }
+    const [token, setToken] = React.useState('');
+
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
+
+    const storeData = async (value) => {
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('token', jsonValue)
+        } catch (e) {
+          // saving error
+        }
+      }
+    storeData(token);
+
     return (
 
         <SafeAreaView style={loginStyle.content}>

@@ -1,30 +1,118 @@
-import  React from 'react';
+import * as React  from 'react';
+import {  View,  } from 'react-native';
+import { Text } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { StyleSheet } from 'react-native';
+
+import login  from './componente/login';
+import principal from './componente/principal';
+import cadastro from './componente/cadastro';
+import camera from './componente/camera';
+import preview from './componente/preview';
+import ListItem from './componente/ListItem'
 
 
-import home from './componente/home'
-import agendamento from './componente/agendamento'
-import exames from './componente/exames'
-import perfil from './componente/perfil'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+const AuthContext = React.createContext();
+
+const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator();
+
+
   
-  const Tab = createMaterialBottomTabNavigator();
-  
+function SplashScreen() 
+{
+  return (
+    <View>
+      <Text>Loading...</Text>
+    </View>
+  );
+}
+export default function App({ navigation   }) {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null,
+    }
+  );
 
-export default function app() {
-    return (
-        <NavigationContainer>
-          <Tab.Navigator
-            barStyle={{ backgroundColor: 'white' }}
+  React.useEffect(() => {
+    const bootstrapAsync = async () => {
+      let userToken;
 
-          >
-            <Tab.Screen name="Home" component={home} options={{ tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="home" color={color} size={26} /> ),}} />
-            <Tab.Screen name="Exames" component={exames} options={{  tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="calendar" color={color} size={26} /> ),}} />
-            <Tab.Screen name="Agendamentos" component={agendamento}options={{  tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="alarm" color={color} size={26} /> ),}}  />
-            <Tab.Screen name="Perfil" component={perfil} options={{  tabBarIcon: ({ color }) => ( <MaterialCommunityIcons name="account" color={color} size={26} /> ),}} />
-          </Tab.Navigator>
-        </NavigationContainer>
-    );
-  }
+      try {
+      } catch (e) {
+      }
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    };
+
+    bootstrapAsync();
+  }, []);
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async (data) => {
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async (data) => {
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
+
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {state.isLoading ? (
+            // We haven't finished checking for the token yet
+            <Stack.Screen name="Splash" component={SplashScreen} />
+          ) : state.userToken == null ? (
+            // No token found, user isn't signed in
+            <Stack.Screen
+              name="SignIn"
+              component={login}
+              options={{
+                title: '',
+                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+              }}
+            />
+          ) : (
+            // User is signed in
+            <Stack.Screen name="OTAPP" component={principal} />
+          )}
+          <Stack.Screen name="OTAPP" component={principal} />
+          <Stack.Screen name='cadastro' component={cadastro} />
+          <Stack.Screen name='camera' component={camera} />
+          <Stack.Screen name='preview' component={preview} />
+          <Stack.Screen name='ListItem' component={ListItem} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+}

@@ -9,31 +9,31 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Button } from 'react-native-paper';
-import { navigation } from '@react-navigation/native';
+import { navigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import results from './results';
+import results5 from './results5';
 import { Text } from 'react-native-elements';
-import ListItem from './ListItem';
+import ListItemInfo from './ListItemInfo';
 
 
-function exame({ navigation, route }) {
+function info({ navigation, route }) {
   
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(results);
+  const [list, setList] = useState(results5);
   
   useEffect(() => {
     if (searchText === '') {
-      setList(results);
+      setList(results5);
     } else { 
       setList(
-        results.filter((item) => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
+        results5.filter((item) => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
       );
     }
   }, [searchText]);
 
   const handleOrderClick = () => {
-    let newList = [...results];
+    let newList = [...results5];
 
     newList.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
 
@@ -43,11 +43,19 @@ function exame({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Text style={styles.titulo}>Meus Exames</Text>
-      <Button style={styles.voltar} 
-        icon="chevron-left" mode="text" onPress={() => navigation.navigate("Home")}>
-        <Text style={styles.voltarTexto}>Voltar</Text>
-      </Button>
+      <Text style={styles.titulo}>Info Vacinas</Text>
+  
+      <View>
+        <Button style={styles.voltar} 
+          icon="chevron-left" mode="text" onPress={() => navigation.navigate("Vacinas")}>
+          <Text style={styles.voltarTexto}>Minhas Vacinas</Text>
+        </Button>
+        <Button style={styles.maissobre} 
+          icon="chevron-right" mode="text" onPress={() => navigation.navigate("Home")}>
+          <Text style={styles.voltarTexto}>Home</Text>
+        </Button>
+      </View>
+      
       <View style={styles.searchArea}>
         <TextInput
           style={styles.input}
@@ -57,20 +65,13 @@ function exame({ navigation, route }) {
           value={searchText}
           onChangeText={(t) => setSearchText(t)}
         />
-        <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
-          <MaterialCommunityIcons
-            name="order-alphabetical-ascending"
-            size={32}
-            color="#ff5618"
-          />
-        </TouchableOpacity>
       </View>
 
       <FlatList
         data={list}
         style={styles.list}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ListItem data={item}/>}
+        renderItem={({ item }) => <ListItemInfo data={item}/>}
       />
     </SafeAreaView>
   );
@@ -119,6 +120,16 @@ const styles = StyleSheet.create({
   voltarTexto: {
     textDecorationLine: 'underline',
   },
+  maissobre: {
+    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
+    position: 'absolute'
+  },
+  itemPhoto: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+  },
 });
 
-export default exame;
+export default info;

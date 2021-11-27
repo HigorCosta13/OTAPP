@@ -7,17 +7,17 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  Button,
 } from 'react-native';
-import { Button } from 'react-native-paper';
 import { navigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import results from './results';
-import { Text } from 'react-native-elements';
 import ListItem from './ListItem';
+import { Text } from 'react-native-elements';
 
 
-function exame({ navigation, route }) {
+function sobrevac({ navigation, route }) {
   
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState(results);
@@ -43,11 +43,7 @@ function exame({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Text style={styles.titulo}>Meus Exames</Text>
-      <Button style={styles.voltar} 
-        icon="chevron-left" mode="text" onPress={() => navigation.navigate("Home")}>
-        <Text style={styles.voltarTexto}>Voltar</Text>
-      </Button>
+      <Text style={styles.titulo}>Mais Sobre Vacinas</Text>
       <View style={styles.searchArea}>
         <TextInput
           style={styles.input}
@@ -57,13 +53,6 @@ function exame({ navigation, route }) {
           value={searchText}
           onChangeText={(t) => setSearchText(t)}
         />
-        <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
-          <MaterialCommunityIcons
-            name="order-alphabetical-ascending"
-            size={32}
-            color="#ff5618"
-          />
-        </TouchableOpacity>
       </View>
 
       <FlatList
@@ -113,12 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'gray',
   },
-  voltar: {
-    alignItems: 'flex-start',
-  },
-  voltarTexto: {
-    textDecorationLine: 'underline',
-  },
 });
 
-export default exame;
+export default sobrevac;
